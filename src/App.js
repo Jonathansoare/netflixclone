@@ -8,7 +8,7 @@ import FeatureadMovie from "./components/FeatureadMovie"
 export default () => {
 
   const [movieList, setMovieList] = useState([])
-  const [featuredData, setfeaturedData] = useState(null)
+  const [featuredData, setfeaturedData] = useState({})
 
 
   useEffect(() => {
@@ -21,8 +21,8 @@ export default () => {
       let originals = list.filter(i=>i.slug === 'originals')
       let randomChosen = Math.floor(Math.random() * (originals[0].items.results.length -1))
       let chosen = originals[0].items.results[randomChosen]
-
-      console.log(chosen);
+      let chosenInfo = await tmdb.getMovieInfo(chosen.id,'tv')
+      setfeaturedData(chosenInfo)
     }
 
     loadAll();
