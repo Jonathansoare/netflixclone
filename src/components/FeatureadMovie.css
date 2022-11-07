@@ -47,6 +47,9 @@
     font-size: 20px;
     color: #999;
     max-width: 40%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .featured--buttons{
