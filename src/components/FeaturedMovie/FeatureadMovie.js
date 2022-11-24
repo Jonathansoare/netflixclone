@@ -3,7 +3,6 @@ import './FeatureadMovie.css';
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default ({item}) =>{
-    console.log(item);
 
     let firstDate = new Date(item.first_air_date)
     let genres = []
@@ -11,24 +10,7 @@ export default ({item}) =>{
         genres.push(item.genres[i].name)
     }
 
-    function abrir()
-    {
-        alert("clicou")
-        var botao = document.className('.btn-ver')
-        var td = botao.parentElement;
-        var spans = td.getElementsByClassName('.container partial');
-        var verMaisVisivel = spans[1].style.display === "none";
-        
-        if (verMaisVisivel) {
-            spans[0].style.display = spans[0].style.display = "none";
-            spans[1].style.display = spans[1].style.display = "block";
-            botao.innerHTML = "Ver Menos";
-        } else {
-            spans[0].style.display = spans[0].style.display = "block";
-            spans[1].style.display = spans[1].style.display = "none";
-            botao.innerHTML = "Ver Mais";
-        }
-    }
+   
 
     return (
         <section className='featured' style={{
@@ -45,16 +27,14 @@ export default ({item}) =>{
                         <div className='featured--seasons'>{item.number_of_seasons} Temporada{item.number_of_seasons !== 1 ? 's' : ''}</div>
                     </div>
                     <div className='featured--description'>
-                        <div className='container partial'>{item.overview}</div>
-                        <a className='txt-more'></a>
-                        <button className='btn-ver' onClick={abrir}>...Ver Mais</button>
+                        <div className='description'>{item.overview}</div>
                     </div>
                     <div className='featured--buttons'>
                         <a href={`/watch/${item.id}`} className='featured--watchbutton'>▷ Assistir</a>
                         <a href={`/list/add/${item.id}`} className='featured--mylistbutton'>+ Minha lista</a>
 
                     </div>
-                    <div className='featured--genres'><strong>Gênero:</strong>{genres.join(',')}</div>
+                    <div className='featured--genres'><strong>Gênero:  </strong>{genres.join(',')}</div>
                 </div>
             </div>
         </section>
