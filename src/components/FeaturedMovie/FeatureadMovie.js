@@ -1,5 +1,5 @@
 import React from 'react';
-import './FeatureadMovie.css'
+import './FeatureadMovie.css';
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default ({item}) =>{
@@ -9,6 +9,25 @@ export default ({item}) =>{
     let genres = []
     for(let i in item.genres){
         genres.push(item.genres[i].name)
+    }
+
+    function abrir()
+    {
+        alert("clicou")
+        var botao = document.className('.btn-ver')
+        var td = botao.parentElement;
+        var spans = td.getElementsByClassName('.container partial');
+        var verMaisVisivel = spans[1].style.display === "none";
+        
+        if (verMaisVisivel) {
+            spans[0].style.display = spans[0].style.display = "none";
+            spans[1].style.display = spans[1].style.display = "block";
+            botao.innerHTML = "Ver Menos";
+        } else {
+            spans[0].style.display = spans[0].style.display = "block";
+            spans[1].style.display = spans[1].style.display = "none";
+            botao.innerHTML = "Ver Mais";
+        }
     }
 
     return (
@@ -25,7 +44,11 @@ export default ({item}) =>{
                         <div className='featured--year'>{firstDate.getFullYear()}</div>
                         <div className='featured--seasons'>{item.number_of_seasons} Temporada{item.number_of_seasons !== 1 ? 's' : ''}</div>
                     </div>
-                    <div className='featured--description'>{item.overview}</div>
+                    <div className='featured--description'>
+                        <div className='container partial'>{item.overview}</div>
+                        <a className='txt-more'></a>
+                        <button className='btn-ver' onClick={abrir}>...Ver Mais</button>
+                    </div>
                     <div className='featured--buttons'>
                         <a href={`/watch/${item.id}`} className='featured--watchbutton'>▷ Assistir</a>
                         <a href={`/list/add/${item.id}`} className='featured--mylistbutton'>+ Minha lista</a>
